@@ -1,37 +1,47 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css" />
-    <title>Wikkity Whack Weather</title>
+    <title>Wikkity Wikkity Whack Weather</title>
 </head>
 
-<body>
-    <header>
-        <h1>Weather Dashboard</h1>
+<body class="flex-column min-100-vh">
+    <header class="hero">
+        <h1 class="app-title">
+            Wikkity Whack Weather Forecast
+        </h1>
+        <p>Search the weather!
+        </p>
     </header>
-    <!-- column to the left of main info page -->
-    <div class="search-box">
-        <h1>Search for a City:</h1>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="San Diego" aria-label="San Diego" aria-describedby="button-addon">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon">Button</button>
-            <hr>
+
+
+    <main class="flex-row justify-space-between">
+        <div class="col-12 col-md-4">
+
+            <div class="card">
+                <h3 class="card-header text-uppercase">Search By City</h3>
+                <form id="user-form" class="card-body">
+                    <label class="form-label" for="city">City</label>
+                    <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+                    <button type="submit" class="btn">Get Weather</button>
+                </form>
+            </div>
 
         </div>
-    </div>
 
-    <main class="container">
-        <div class="row displayBox">
-            <p>display info here</p>
-        </div>
-        <div class="row forecast">
-            <p>forecast here</p>
+        <div class="col-12 col-md-8">
+            <h2 class="subtitle">Showing Weather <span id="city-search-term"></span></h2>
+            <div id="weather-container" class="list-group"></div>
         </div>
     </main>
+
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
