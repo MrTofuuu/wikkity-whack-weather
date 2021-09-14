@@ -74,4 +74,7 @@ var displayWeather = function(weather, searchTerm) {
     }
 };
 
+function printWeather() {
+    //logic to print the weather goes here
+}
 cityFormEl.addEventListener('submit', formSubmitHandler);
