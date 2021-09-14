@@ -11,26 +11,16 @@ var formSubmitHandler = function(event) {
     if (city) {
         getCityWeather(city);
 
-        repoContainerEl.textContent = '';
-        nameInputEl.value = '';
+        weatherContainerEl.textContent = '';
+        cityInputEl.value = '';
     } else {
         alert('Please enter a city');
     }
 };
 
-var buttonClickHandler = function(event) {
-    var language = event.target.getAttribute('data-language');
-
-    if (language) {
-        getFeaturedRepos(language);
-
-        repoContainerEl.textContent = '';
-    }
-};
-
 var getCityWeather = function(city) {
-    var apiUrl = 'https://api.github.com/users/' + city + '/repos';
-
+    var apiUrl = 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=f48eeb974e0cd19636dc2234eda9e443';
+    //f48eeb974e0cd19636dc2234eda9e443 api key
     fetch(apiUrl)
         .then(function(response) {
             if (response.ok) {
@@ -49,7 +39,7 @@ var getCityWeather = function(city) {
 
 var displayWeather = function(weather, searchTerm) {
     if (weather.length === 0) {
-        weatherContainerEl.textContent = 'No forcast found';
+        weatherContainerEl.textContent = 'No forecast found';
         return;
     }
 
@@ -78,9 +68,8 @@ var displayWeather = function(weather, searchTerm) {
 
         repoEl.appendChild(statusEl);
 
-        repoContainerEl.appendChild(repoEl);
+        weatherContainerEl.appendChild(repoEl);
     }
 };
 
-userFormEl.addEventListener('submit', formSubmitHandler);
-languageButtonsEl.addEventListener('click', buttonClickHandler);
+cityFormEl.addEventListener('submit', formSubmitHandler);
