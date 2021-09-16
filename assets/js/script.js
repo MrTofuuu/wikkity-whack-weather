@@ -20,7 +20,7 @@ var formSubmitHandler = function(event) {
 
 var getCityWeather = function(city) {
     var apiUrl = 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=f48eeb974e0cd19636dc2234eda9e443';
-
+    // doing two api calls (nested fetch)? 
     //api.openweathermap.org/data/2.5/forecast/daily?q={city name},{state code},{country code}&cnt={cnt}&appid={API key} this might be the more correct use case for the hw
     //f48eeb974e0cd19636dc2234eda9e443 api key
     fetch(apiUrl)
