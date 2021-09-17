@@ -17,12 +17,29 @@ var formSubmitHandler = function(event) {
         alert('Please enter a city');
     }
 };
-
-var getCityWeather = function(city) {
+var getCityLatLon = function(city) {
     var apiUrl = 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=f48eeb974e0cd19636dc2234eda9e443';
-    // doing two api calls (nested fetch)? 
-    //api.openweathermap.org/data/2.5/forecast/daily?q={city name},{state code},{country code}&cnt={cnt}&appid={API key} this might be the more correct use case for the hw
-    //f48eeb974e0cd19636dc2234eda9e443 api key
+    // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
+    fetch(apiUrl)
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    console.log(data);
+                });
+            } else {
+                alert('Error: ' + response.statusText);
+                data.lat
+                data.lon
+                    //return lat and lon or should i jsut save the api response as an object and only use the lat lon info?
+            }
+        })
+}
+var getCityWeather = function(getCityLatLon) {
+    var apiUrl = ''
+        // doing two api calls (nested fetch)? 
+        // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+        //api.openweathermap.org/data/2.5/forecast/daily?q={city name},{state code},{country code}&cnt={cnt}&appid={API key} this might be the more correct use case for the hw
+        //f48eeb974e0cd19636dc2234eda9e443 api key
     fetch(apiUrl)
         .then(function(response) {
             if (response.ok) {
