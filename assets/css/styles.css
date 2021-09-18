@@ -5,3 +5,8 @@
 .app-title {
     text-align: center;
 }
+
+.container {
+    width: 100vw;
+    max-width: 100vw;
+}

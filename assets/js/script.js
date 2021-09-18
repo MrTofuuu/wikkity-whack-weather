@@ -7,32 +7,48 @@ var formSubmitHandler = function(event) {
     event.preventDefault();
 
     var city = cityInputEl.value.trim();
-
+    console.log("first print " + city);
     if (city) {
-        getCityWeather(city);
+        console.log(city);
+        getCityLatLon(city);
 
-        weatherContainerEl.textContent = '';
+        //weatherContainerEl.textContent = '';
         cityInputEl.value = '';
     } else {
         alert('Please enter a city');
     }
 };
+// fetch('https://api.openweathermap.org/data/2.5/forecast?q=dallas&appid=f48eeb974e0cd19636dc2234eda9e443')
+//     .then(function(response) {
+//         if (response.ok) {
+//             console.log(response);
+//             response.json().then(function(data) {
+//                 console.log(data);
+//             })
+//         } else {
+//             console.log("Error: " + response.statusText);
+//         }
+//     })
+
 var getCityLatLon = function(city) {
-    var apiUrl = 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=f48eeb974e0cd19636dc2234eda9e443';
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=f48eeb974e0cd19636dc2234eda9e443';
     // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
+    // console.log(apiUrl);
     fetch(apiUrl)
         .then(function(response) {
             if (response.ok) {
+                // console.log(response);
                 response.json().then(function(data) {
                     console.log(data);
+                    // return data;
                 });
             } else {
                 alert('Error: ' + response.statusText);
-                data.lat
-                data.lon
-                    //return lat and lon or should i jsut save the api response as an object and only use the lat lon info?
+                //return lat and lon or should i jsut save the api response as an object and only use the lat lon info?
             }
-        })
+        }).catch(function(error) {
+            alert('Unable to getCityLatLon: invalid connection');
+        });
 }
 var getCityWeather = function(getCityLatLon) {
     var apiUrl = ''
@@ -56,40 +72,7 @@ var getCityWeather = function(getCityLatLon) {
 };
 
 
-var displayWeather = function(weather, searchTerm) {
-    if (weather.length === 0) {
-        weatherContainerEl.textContent = 'No forecast found';
-        return;
-    }
-
-    citySearchTerm.textContent = searchTerm;
-    //left off here 9-11
-    for (var i = 0; i < repos.length; i++) {
-        var repoName = repos[i].owner.login + '/' + repos[i].name;
-
-        var repoEl = document.createElement('div');
-        repoEl.classList = 'list-item flex-row justify-space-between align-center';
-
-        var titleEl = document.createElement('span');
-        titleEl.textContent = repoName;
-
-        repoEl.appendChild(titleEl);
-
-        var statusEl = document.createElement('span');
-        statusEl.classList = 'flex-row align-center';
-
-        if (repos[i].open_issues_count > 0) {
-            statusEl.innerHTML =
-                "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
-        } else {
-            statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-        }
-
-        repoEl.appendChild(statusEl);
-
-        weatherContainerEl.appendChild(repoEl);
-    }
-};
+var displayWeather = function(weather, searchTerm) {};
 
 function printWeather() {
     //logic to print the weather goes here
