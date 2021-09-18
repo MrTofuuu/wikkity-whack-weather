@@ -34,6 +34,8 @@ Created a Javascript weather forecast with javascript
 [Link to the code repository](https://github.com/MrTofuuu/wikkity-whack-weather)
 
 
+
+
 ## Credits
 Chris Stallcup
 
@@ -43,7 +45,7 @@ Chris Stallcup
 * [https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)
 * [https://betterprogramming.pub/add-badges-to-a-github-repository-716d2988dc6a](https://betterprogramming.pub/add-badges-to-a-github-repository-716d2988dc6a)
 
-
+https://www.quora.com/How-can-I-apply-a-gradient-color-on-my-navbar-through-materialize-CSS
 ## Badges
 
 [![GitHub open issues](https://img.shields.io/github/issues/MrTofuuu/wikkity-whack-weather?style=for-the-badge)](https://github.com/MrTofuuu/wikkity-whack-weather/issues)

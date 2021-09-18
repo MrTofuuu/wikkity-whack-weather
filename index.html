@@ -6,41 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Wikkity Wikkity Whack Weather</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<body>
     <header class="hero">
         <h1 class="app-title">
             Wikkity Whack Weather Forecast
         </h1>
-        <p>Search the weather!
-        </p>
     </header>
 
 
     <main class="flex-row justify-space-between">
-        <div class="col-12 col-md-4">
+        <div class="row">
+            <div class="col s3">
 
-            <div class="card">
-                <h3 class="card-header text-uppercase">Search By City</h3>
-                <form id="city-form" class="card-body">
-                    <label class="form-label" for="city">City</label>
-                    <input name="city" id="city" type="text" autofocus="true" class="form-input" />
-                    <button type="submit" class="btn">Get Weather</button>
-                </form>
+                <div class="card">
+                    <h3 class="card-header text-uppercase">Search By City</h3>
+                    <form id="city-form" class="card-body">
+                        <label class="form-label" for="city">City</label>
+                        <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+                        <button type="submit" class="btn waves-effect waves-light blue lighten-1">Search</button>
+                    </form>
+                </div>
+                <div class="divider"></div>
+                <div>
+                    <p>previous searches go here</p>
+                </div>
+
+            </div>
+
+
+            <div class="col s9">
+                <div class="card">
+                    <div id="weather-container collection with-header">
+                        <ul class="collection with-header">
+                            <li>
+                                <h2 class="subtitle">City Name Goes Here and Date <span id="city-search-term"></span></h2>
+                            </li>
+                            <li>Temp: </li>
+                            <li>Wind: </li>
+                            <li>Humidty: </li>
+                            <li>UV Index: </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s9">
+                <div class="card">
+                    <div id="forecast-container">
+                        <h3>5-Day Forecast: </h3>
+                    </div>
+                </div>
             </div>
 
         </div>
-
-        <div class="col-12 col-md-8">
-            <h2 class="subtitle">Showing Weather <span id="city-search-term"></span></h2>
-            <div id="weather-container" class="list-group"></div>
-        </div>
     </main>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
