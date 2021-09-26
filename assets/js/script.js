@@ -1,8 +1,10 @@
 var cityFormEl = document.querySelector('#city-form');
 var cityInputEl = document.querySelector('#city');
 var weatherContainerEl = document.querySelector('#weather-container');
+var forecastContainerEl = document.querySelector('#forecast-container');
+var currentWeatherEL;
 var citySearchTerm = document.querySelector('#city-search-term');
-var weeklyForecast = [];
+var weeklyForecast;
 var currentCityName;
 var formSubmitHandler = function(event) {
     event.preventDefault();
@@ -18,6 +20,7 @@ var formSubmitHandler = function(event) {
     } else {
         alert('Please enter a city');
     }
+
 };
 
 // Function to get the lattitude and longitude 
@@ -62,16 +65,18 @@ var getWeather = function(lat, lon) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    // console.log("this is the forcast data");
+                    // console.log("this is the api returned data for one call");
                     // console.log(data);
+                    // console.log("array length for daily is " + data.daily.length)
+                    // saving current and weekly forecast info as an object 
                     currentForecast = data.current;
-                    console.log("current forecsst data");
-                    console.log(currentForecast);
-                    // console.log("array length is " + data.daily.length)
-                    // saving weekly forecast info as an object
                     weeklyForecast = data.daily;
+                    console.log("current forecast data");
+                    console.log(currentForecast);
                     console.log("Weekly forecast info ")
                     console.log(weeklyForecast);
+                    console.log("this is the humidity from the first " + weeklyForecast[0].humidity)
+                    console.log(weeklyForecast[0].humidity);
                     displayWeather(weeklyForecast);
                 });
             } else {
@@ -91,24 +96,70 @@ var displayWeather = function(weeklyForecast) {
         alert("no forecast info found");
         return;
     }
-    // append to weatherContainerEl
+    // Clears current display if it exists
+    if (currentWeatherEL) {
+        console.log("currentWeatherEl if statement works");
+        weatherContainerEl.removeChild(currentWeatherEL);
+        forecastContainerEl.innerHTML = "";
+    }
+
     //creation of elements for current weather info
-    var currentWeatherEL = document.createElement('ul');
+    currentWeatherEL = document.createElement('ul');
     currentWeatherEL.classList = 'collection with-header';
     var currentCity = document.createElement('li');
     currentCity.innerHTML = '<li><h2 class="subtitle"><span id="city-search-term">' + currentCityName + ' and Date </span></h2></li>'
     var currentTemp = document.createElement('li');
-    currentTemp.innerHTML = 'Temp: ' + 1;
+    currentTemp.innerHTML = 'Temp: ' + currentForecast.temp;
     var currentWind = document.createElement('li');
+    currentWind.innerHTML = 'Wind: ' + currentForecast.wind_speed;
+    var currentHum = document.createElement('li');
+    currentHum.innerHTML = 'Humidity: ' + currentForecast.humidity;
     var currentUv = document.createElement('li');
+    currentUv.innerHTML = 'UVI: ' + currentForecast.uvi;
+
 
     // loop to create the forecast info (max of 5 days)
     for (let i = 0; i < 5; i++) {
-        // looped creation of 5 day forecast
+        //creation of 5 day forecast
+        var forecastCol = document.createElement('div');
+        forecastCol.classList = 'col s2 forecast ';
+        var forecastCard = document.createElement('div');
+        forecastCard.classList = 'card  blue-grey darken-1';
+        var forecastContent = document.createElement('div');
+        forecastContent.classList = 'card-content white-text'
+        var forecastDate = document.createElement('p');
+        forecastDate.innerHTML = 'Placeholder for date ' + i;
+        var forecastIcon = document.createElement('p');
+        forecastIcon.innerHTML = 'Placeholder for icon ' + i;
+        var forecastTemp = document.createElement('p');
+        forecastTemp.innerHTML = 'Temp: ' + weeklyForecast[i].temp.day + ' °F';
+        var forecastWind = document.createElement('p');
+        forecastWind.innerHTML = 'Wind: ' + weeklyForecast[i].wind_speed + ' MPH';
+        var forecastHum = document.createElement('p');
+        forecastHum.innerHTML = 'Humidity: ' + weeklyForecast[i].humidity + ' %';
+        //appending all info to the cards
+        forecastContent.appendChild(forecastDate);
+        forecastContent.appendChild(forecastIcon);
+        forecastContent.appendChild(forecastTemp);
+        forecastContent.appendChild(forecastWind);
+        forecastContent.appendChild(forecastHum);
+
+        forecastCard.appendChild(forecastContent)
+
+        forecastCol.appendChild(forecastCard);
+        // appending all to 
+        forecastContainerEl.appendChild(forecastCol);
+
     }
 
+    // appending all current weather info to a list 
     currentWeatherEL.appendChild(currentCity);
+    currentWeatherEL.appendChild(currentTemp);
+    currentWeatherEL.appendChild(currentWind);
+    currentWeatherEL.appendChild(currentHum);
+    currentWeatherEL.appendChild(currentUv);
 
+    // appending the list to the weather container 
     weatherContainerEl.appendChild(currentWeatherEL);
 
 };
