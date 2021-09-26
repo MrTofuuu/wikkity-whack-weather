@@ -91,6 +91,7 @@ var getWeather = function(lat, lon) {
 
 var displayWeather = function(weeklyForecast) {
     console.log("this is the display weather function");
+    var forecastDate;
     // Checking to see if the object is empty 
     if (weeklyForecast.length === 0) {
         alert("no forecast info found");
@@ -102,12 +103,15 @@ var displayWeather = function(weeklyForecast) {
         weatherContainerEl.removeChild(currentWeatherEL);
         forecastContainerEl.innerHTML = "";
     }
-
+    console.log('this is current weather');
+    console.log(currentForecast);
+    forecastDate = currentForecast.dt;
+    var formatDate = new Date(forecastDate * 1000).toLocaleDateString("en-US");
     //creation of elements for current weather info
     currentWeatherEL = document.createElement('ul');
     currentWeatherEL.classList = 'collection with-header';
     var currentCity = document.createElement('li');
-    currentCity.innerHTML = '<li><h2 class="subtitle"><span id="city-search-term">' + currentCityName + ' and Date </span></h2></li>'
+    currentCity.innerHTML = '<li><h2 class="subtitle"><span id="city-search-term">' + currentCityName + ' ' + formatDate + '</span></h2></li>'
     var currentTemp = document.createElement('li');
     currentTemp.innerHTML = 'Temp: ' + currentForecast.temp;
     var currentWind = document.createElement('li');
@@ -120,6 +124,16 @@ var displayWeather = function(weeklyForecast) {
 
     // loop to create the forecast info (max of 5 days)
     for (let i = 0; i < 5; i++) {
+        // Getting date from object, but it is in GMT unix format
+        forecastDate = weeklyForecast[i].dt;
+        var weatherObj = weeklyForecast[i].weather[0]
+        var icon = weatherObj.icon;
+        var iconUrl = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
+        console.log(icon)
+        console.log(iconUrl);
+        // console.log(forecastDate)
+        // converting the timestamp to MM/DD/YYYY
+        formatDate = new Date(forecastDate * 1000).toLocaleDateString("en-US");
         //creation of 5 day forecast
         var forecastCol = document.createElement('div');
         forecastCol.classList = 'col s2 forecast ';
@@ -128,9 +142,9 @@ var displayWeather = function(weeklyForecast) {
         var forecastContent = document.createElement('div');
         forecastContent.classList = 'card-content white-text'
         var forecastDate = document.createElement('p');
-        forecastDate.innerHTML = 'Placeholder for date ' + i;
+        forecastDate.innerHTML = formatDate;
         var forecastIcon = document.createElement('p');
-        forecastIcon.innerHTML = 'Placeholder for icon ' + i;
+        forecastIcon.innerHTML = '<img src=' + iconUrl + '>';
         var forecastTemp = document.createElement('p');
         forecastTemp.innerHTML = 'Temp: ' + weeklyForecast[i].temp.day + ' °F';
         var forecastWind = document.createElement('p');

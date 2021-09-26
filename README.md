@@ -44,8 +44,9 @@ Chris Stallcup
 * [https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax/)
 * [https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)
 * [https://betterprogramming.pub/add-badges-to-a-github-repository-716d2988dc6a](https://betterprogramming.pub/add-badges-to-a-github-repository-716d2988dc6a)
+* [How to apply gradient](https://www.quora.com/How-can-I-apply-a-gradient-color-on-my-navbar-through-materialize-CSS)
+* [Time Stamp conversion](https://stackoverflow.com/questions/24170933/convert-unix-timestamp-to-date-time-javascript)
 
-https://www.quora.com/How-can-I-apply-a-gradient-color-on-my-navbar-through-materialize-CSS
 ## Badges
 
 [![GitHub open issues](https://img.shields.io/github/issues/MrTofuuu/wikkity-whack-weather?style=for-the-badge)](https://github.com/MrTofuuu/wikkity-whack-weather/issues)
