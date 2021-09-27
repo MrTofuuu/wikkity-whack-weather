@@ -46,6 +46,9 @@ Chris Stallcup
 * [https://betterprogramming.pub/add-badges-to-a-github-repository-716d2988dc6a](https://betterprogramming.pub/add-badges-to-a-github-repository-716d2988dc6a)
 * [How to apply gradient](https://www.quora.com/How-can-I-apply-a-gradient-color-on-my-navbar-through-materialize-CSS)
 * [Time Stamp conversion](https://stackoverflow.com/questions/24170933/convert-unix-timestamp-to-date-time-javascript)
+* [Capitalizing first letter of string](https://capitalizemytitle.com/ufaqs/how-to-uppercase-the-first-letter-of-a-string-in-javascript/)
+* [Removing first item of array](https://www.w3schools.com/jsref/jsref_shift.asp)
+* [How to use materialize](https://materializecss.com/)
 
 ## Badges
 

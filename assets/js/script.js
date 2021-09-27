@@ -4,8 +4,10 @@ var weatherContainerEl = document.querySelector('#weather-container');
 var forecastContainerEl = document.querySelector('#forecast-container');
 var currentWeatherEL;
 var citySearchTerm = document.querySelector('#city-search-term');
+var cityListEl = document.querySelector('#city-list');
 var weeklyForecast;
 var currentCityName;
+var cityList = [];
 var formSubmitHandler = function(event) {
     event.preventDefault();
 
@@ -14,15 +16,46 @@ var formSubmitHandler = function(event) {
     if (city) {
         // console.log(city);
         getLatLon(city);
-
-        //weatherContainerEl.textContent = '';
+        renderPreviousCity(city);
         cityInputEl.value = '';
     } else {
         alert('Please enter a city');
     }
 
-};
 
+
+};
+// rendering of the previous city list, it also includes removing if list is over 10 items 
+function renderPreviousCity(city) {
+    //clears previous city list so that there will not be duplicates renders
+    cityListEl.innerHTML = "";
+    // removing first entry in the city list if it's over 10 entries
+    if (cityList.length > 10) {
+        cityList.shift();
+    }
+    // render a new button for old searches
+    for (let i = 0; i < cityList.length; i++) {
+        // uppercasing of first letter  
+        var upperCity = city.charAt(0).toUpperCase() + city.slice(1);
+        // variable to create a button
+        var button = document.createElement('button');
+        button.classList = 'btn grey lighten-1'
+        button.textContent = upperCity;
+
+        // appending to city list container 
+        cityListEl.appendChild(button);
+    }
+
+
+}
+// initialize items on page load, previous saved cities 
+function init() {
+
+}
+// Function for stroing previous city to localstorage
+function storePreviousCity() {
+    localStorage.setItem("cityList", JSON.stringify(cityList));
+}
 // Function to get the lattitude and longitude 
 var getLatLon = function(city) {
     var apiKey = 'f48eeb974e0cd19636dc2234eda9e443'
@@ -179,3 +212,5 @@ var displayWeather = function(weeklyForecast) {
 };
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
+
+init();
