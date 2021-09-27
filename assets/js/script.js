@@ -16,7 +16,11 @@ var formSubmitHandler = function(event) {
     if (city) {
         // console.log(city);
         getLatLon(city);
-        renderPreviousCity(city);
+        // add city to previous city list 
+        cityList.push(city);
+        // store updated cities in localStorage, re-render the list 
+        storePreviousCity();
+        renderPreviousCity();
         cityInputEl.value = '';
     } else {
         alert('Please enter a city');
@@ -26,7 +30,7 @@ var formSubmitHandler = function(event) {
 
 };
 // rendering of the previous city list, it also includes removing if list is over 10 items 
-function renderPreviousCity(city) {
+function renderPreviousCity() {
     //clears previous city list so that there will not be duplicates renders
     cityListEl.innerHTML = "";
     // removing first entry in the city list if it's over 10 entries
@@ -36,7 +40,7 @@ function renderPreviousCity(city) {
     // render a new button for old searches
     for (let i = 0; i < cityList.length; i++) {
         // uppercasing of first letter  
-        var upperCity = city.charAt(0).toUpperCase() + city.slice(1);
+        var upperCity = cityList[i].charAt(0).toUpperCase() + cityList[i].slice(1);
         // variable to create a button
         var button = document.createElement('button');
         button.classList = 'btn grey lighten-1'
@@ -50,7 +54,15 @@ function renderPreviousCity(city) {
 }
 // initialize items on page load, previous saved cities 
 function init() {
+    // get stored previous searched cities from localStorage
+    var storedCities = JSON.parse(localStorage.getItem('cityList'));
 
+    // if there are cities were retreived from localStorage, update the cityList array to it 
+    if (storedCities !== null) {
+        cityList = storedCities;
+    }
+
+    renderPreviousCity();
 }
 // Function for stroing previous city to localstorage
 function storePreviousCity() {
