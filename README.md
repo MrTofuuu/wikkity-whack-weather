@@ -37,7 +37,7 @@ Created a Javascript weather forecast with javascript
 
 
 ## Credits
-Chris Stallcup
+Chris Stallcup, mananjoshi1995 from AskBCS (Helped solve the issue where I didn't know how to do another search using the button created for previous cities)
 
 
 ### References and tutorials utilized

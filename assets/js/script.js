@@ -60,6 +60,7 @@ function renderPreviousCity() {
         var button = document.createElement('button');
         button.classList = 'btn btn-search grey lighten-1'
         button.textContent = cityList[i];
+        button.addEventListener("click", function() { getLatLon(cityList[i]) });
 
         // new class for previously searched cities to handle the button click similarly to formsubmithandler 
 
