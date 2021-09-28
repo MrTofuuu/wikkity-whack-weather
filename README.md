@@ -49,6 +49,8 @@ Chris Stallcup, mananjoshi1995 from AskBCS (Helped solve the issue where I didn'
 * [Capitalizing first letter of string](https://capitalizemytitle.com/ufaqs/how-to-uppercase-the-first-letter-of-a-string-in-javascript/)
 * [Removing first item of array](https://www.w3schools.com/jsref/jsref_shift.asp)
 * [How to use materialize](https://materializecss.com/)
+* [How to insert first item in array](https://www.w3schools.com/jsref/jsref_unshift.asp#:~:text=The%20unshift()%20method%20adds,an%20array%2C%20use%20push()%20.)
+* [Remove duplicate from array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 
 ## Badges
 

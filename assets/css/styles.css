@@ -1,4 +1,9 @@
+.header {
+    margin: 0;
+}
+
 .hero {
+    height: 20vh;
     background: linear-gradient(to left, darkblue, lightblue);
 }
 
@@ -12,6 +17,22 @@
 }
 
 .btn-search {
-    width: 100%;
+    width: 95%;
     margin: 0 2vh 2vh 0;
+    font-weight: bold;
+}
+
+.uv-favorable {
+    background: green;
+    border-radius: 5px;
+}
+
+.uv-moderate {
+    background: yellow;
+    border-radius: 5px;
+}
+
+.uv-severe {
+    background: red;
+    border-radius: 5px;
 }

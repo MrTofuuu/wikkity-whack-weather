@@ -5,6 +5,7 @@ var forecastContainerEl = document.querySelector('#forecast-container');
 var currentWeatherEL;
 var citySearchTerm = document.querySelector('#city-search-term');
 var cityListEl = document.querySelector('#city-list');
+var uvEL;
 var weeklyForecast;
 var currentCityName;
 var cityList = [];
@@ -19,7 +20,7 @@ var formSubmitHandler = function(event) {
         // console.log(city);
         getLatLon(city);
         // add city to previous city list 
-        cityList.push(city);
+        cityList.unshift(city);
         // store updated cities in localStorage, re-render the list 
         storePreviousCity();
         renderPreviousCity();
@@ -37,7 +38,7 @@ function renderPreviousCity() {
     cityListEl.innerHTML = "";
     // removing first entry in the city list if it's over 10 entries
     if (cityList.length > 10) {
-        cityList.shift();
+        cityList.pop();
     }
 
     // do while to check Object.keys , possibly use filter instead (array method) to solve the dupilcate previous cities
@@ -60,6 +61,7 @@ function renderPreviousCity() {
         var button = document.createElement('button');
         button.classList = 'btn btn-search grey lighten-1'
         button.textContent = cityList[i];
+        // Creates an event listener for the button that will run the search again in accordance to the button clicked
         button.addEventListener("click", function() { getLatLon(cityList[i]) });
 
         // new class for previously searched cities to handle the button click similarly to formsubmithandler 
@@ -84,6 +86,8 @@ function init() {
 }
 // Function for stroing previous city to localstorage
 function storePreviousCity() {
+    // Removes duplicates from cityList 
+    cityList = [...new Set(cityList)];
     localStorage.setItem("cityList", JSON.stringify(cityList));
 }
 // Function to get the lattitude and longitude 
@@ -182,7 +186,8 @@ var displayWeather = function(weeklyForecast) {
     var currentHum = document.createElement('li');
     currentHum.innerHTML = 'Humidity: ' + currentForecast.humidity;
     var currentUv = document.createElement('li');
-    currentUv.innerHTML = 'UVI: ' + weeklyForecast[0].uvi;
+    currentUv.innerHTML = 'UVI: <span id="uv">' + weeklyForecast[0].uvi + '</span>';
+
     // put UVI into a div and style that div based on severity level
 
 
@@ -240,8 +245,23 @@ var displayWeather = function(weeklyForecast) {
 
     // appending the list to the weather container 
     weatherContainerEl.appendChild(currentWeatherEL);
+    console.log("right before uv check")
+    uvCheck(weeklyForecast[0].uvi);
 
 };
+
+function uvCheck(uv) {
+    console.log("inside of uv check")
+    uvEL = document.querySelector('#uv')
+    console.log(uvEL);
+    if (uv < 3) {
+        uvEL.setAttribute("class", "uv-favorable");
+    } else if (uv > 4 && uv < 6) {
+        uvEL.setAttribute("class", "uv-moderate");
+    } else {
+        uvEL.setAttribute("class", "uv-severe");
+    }
+}
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
