@@ -24,7 +24,7 @@ Created a Javascript weather forecast with javascript
 
 ## Screenshots
 
-![day planner](./assets/diggity-dawg.gif)
+![Wikkity Wack](./assets/Wikkity-Wikkity-Whack-Weather.gif)
 
 
 ### **Links**
