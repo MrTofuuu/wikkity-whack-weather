@@ -10,3 +10,8 @@
     width: 100vw;
     max-width: 100vw;
 }
+
+.btn-search {
+    width: 100%;
+    margin: 0 2vh 2vh 0;
+}

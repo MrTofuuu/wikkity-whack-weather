@@ -8,10 +8,12 @@ var cityListEl = document.querySelector('#city-list');
 var weeklyForecast;
 var currentCityName;
 var cityList = [];
+var citySearch;
 var formSubmitHandler = function(event) {
     event.preventDefault();
 
     var city = cityInputEl.value.trim();
+    citySearch = cityInputEl.value.trim();
     // console.log("first print " + city);
     if (city) {
         // console.log(city);
@@ -37,14 +39,29 @@ function renderPreviousCity() {
     if (cityList.length > 10) {
         cityList.shift();
     }
+
+    // do while to check Object.keys , possibly use filter instead (array method) to solve the dupilcate previous cities
+    // filter creates conditional statement that filters city list to 
+
+
+    // This is supposed to check and see if the searched city already exists in the citylist, if it does it will not finish the render function
+    // But this is not working as intended
+    // Also need assistance on having the previously searched city buttons search for the old city
+    // if (cityList.includes(citySearch)) {
+    //     console.log("citysearch is " + citySearch)
+    //     console.log("insdie the check for includes")
+    //     return;
+    // }
     // render a new button for old searches
     for (let i = 0; i < cityList.length; i++) {
         // uppercasing of first letter  
-        var upperCity = cityList[i].charAt(0).toUpperCase() + cityList[i].slice(1);
+        // var upperCity = cityList[i].charAt(0).toUpperCase() + cityList[i].slice(1);
         // variable to create a button
         var button = document.createElement('button');
-        button.classList = 'btn grey lighten-1'
-        button.textContent = upperCity;
+        button.classList = 'btn btn-search grey lighten-1'
+        button.textContent = cityList[i];
+
+        // new class for previously searched cities to handle the button click similarly to formsubmithandler 
 
         // appending to city list container 
         cityListEl.appendChild(button);
@@ -116,12 +133,12 @@ var getWeather = function(lat, lon) {
                     // saving current and weekly forecast info as an object 
                     currentForecast = data.current;
                     weeklyForecast = data.daily;
-                    console.log("current forecast data");
-                    console.log(currentForecast);
+                    // console.log("current forecast data");
+                    // console.log(currentForecast);
                     console.log("Weekly forecast info ")
                     console.log(weeklyForecast);
-                    console.log("this is the humidity from the first " + weeklyForecast[0].humidity)
-                    console.log(weeklyForecast[0].humidity);
+                    // console.log("this is the humidity from the first " + weeklyForecast[0].humidity)
+                    // console.log(weeklyForecast[0].humidity);
                     displayWeather(weeklyForecast);
                 });
             } else {
@@ -135,7 +152,7 @@ var getWeather = function(lat, lon) {
 
 
 var displayWeather = function(weeklyForecast) {
-    console.log("this is the display weather function");
+    // console.log("this is the display weather function");
     var forecastDate;
     // Checking to see if the object is empty 
     if (weeklyForecast.length === 0) {
@@ -144,7 +161,7 @@ var displayWeather = function(weeklyForecast) {
     }
     // Clears current display if it exists
     if (currentWeatherEL) {
-        console.log("currentWeatherEl if statement works");
+        // console.log("currentWeatherEl if statement works");
         weatherContainerEl.removeChild(currentWeatherEL);
         forecastContainerEl.innerHTML = "";
     }
@@ -164,7 +181,8 @@ var displayWeather = function(weeklyForecast) {
     var currentHum = document.createElement('li');
     currentHum.innerHTML = 'Humidity: ' + currentForecast.humidity;
     var currentUv = document.createElement('li');
-    currentUv.innerHTML = 'UVI: ' + currentForecast.uvi;
+    currentUv.innerHTML = 'UVI: ' + weeklyForecast[0].uvi;
+    // put UVI into a div and style that div based on severity level
 
 
     // loop to create the forecast info (max of 5 days)
@@ -174,9 +192,10 @@ var displayWeather = function(weeklyForecast) {
         var weatherObj = weeklyForecast[i].weather[0]
         var icon = weatherObj.icon;
         var iconUrl = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
-        console.log(icon)
-        console.log(iconUrl);
-        // console.log(forecastDate)
+        // console.log(icon)
+        // console.log(iconUrl);
+        // console.log("this is the forcast date in unix");
+        // console.log(forecastDate);
         // converting the timestamp to MM/DD/YYYY
         formatDate = new Date(forecastDate * 1000).toLocaleDateString("en-US");
         //creation of 5 day forecast
