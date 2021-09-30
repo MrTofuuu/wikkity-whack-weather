@@ -41,18 +41,6 @@ function renderPreviousCity() {
         cityList.pop();
     }
 
-    // do while to check Object.keys , possibly use filter instead (array method) to solve the dupilcate previous cities
-    // filter creates conditional statement that filters city list to 
-
-
-    // This is supposed to check and see if the searched city already exists in the citylist, if it does it will not finish the render function
-    // But this is not working as intended
-    // Also need assistance on having the previously searched city buttons search for the old city
-    // if (cityList.includes(citySearch)) {
-    //     console.log("citysearch is " + citySearch)
-    //     console.log("insdie the check for includes")
-    //     return;
-    // }
     // render a new button for old searches
     for (let i = 0; i < cityList.length; i++) {
         // uppercasing of first letter  
@@ -101,9 +89,6 @@ var getLatLon = function(city) {
             if (response.ok) {
                 // console.log(response);
                 response.json().then(function(data) {
-                    // console.log("this is in the getLatLon")
-                    // console.log(data);
-                    // console.log("Lat is " + data.city.coord.lat + " lon is " + data.city.coord.lon);
                     // assigning current city name to be used for printing 
                     currentCityName = data.city.name
                         // currentForecast = data;
@@ -124,26 +109,13 @@ var getWeather = function(lat, lon) {
     var apiKey = 'f48eeb974e0cd19636dc2234eda9e443'
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + apiKey + "&units=imperial";
 
-    // doing two api calls (nested fetch)? 
-    // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-    //api.openweathermap.org/data/2.5/forecast/daily?q={city name},{state code},{country code}&cnt={cnt}&appid={API key} this might be the more correct use case for the hw
-    //f48eeb974e0cd19636dc2234eda9e443 api key
     fetch(apiUrl)
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    // console.log("this is the api returned data for one call");
-                    // console.log(data);
-                    // console.log("array length for daily is " + data.daily.length)
                     // saving current and weekly forecast info as an object 
                     currentForecast = data.current;
                     weeklyForecast = data.daily;
-                    // console.log("current forecast data");
-                    // console.log(currentForecast);
-                    console.log("Weekly forecast info ")
-                    console.log(weeklyForecast);
-                    // console.log("this is the humidity from the first " + weeklyForecast[0].humidity)
-                    // console.log(weeklyForecast[0].humidity);
                     displayWeather(weeklyForecast);
                 });
             } else {
@@ -166,12 +138,9 @@ var displayWeather = function(weeklyForecast) {
     }
     // Clears current display if it exists
     if (currentWeatherEL) {
-        // console.log("currentWeatherEl if statement works");
         weatherContainerEl.removeChild(currentWeatherEL);
         forecastContainerEl.innerHTML = "";
     }
-    console.log('this is current weather');
-    console.log(currentForecast);
     forecastDate = currentForecast.dt;
     var formatDate = new Date(forecastDate * 1000).toLocaleDateString("en-US");
     //creation of elements for current weather info
@@ -198,10 +167,6 @@ var displayWeather = function(weeklyForecast) {
         var weatherObj = weeklyForecast[i].weather[0]
         var icon = weatherObj.icon;
         var iconUrl = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
-        // console.log(icon)
-        // console.log(iconUrl);
-        // console.log("this is the forcast date in unix");
-        // console.log(forecastDate);
         // converting the timestamp to MM/DD/YYYY
         formatDate = new Date(forecastDate * 1000).toLocaleDateString("en-US");
         //creation of 5 day forecast
