@@ -28,9 +28,6 @@ var formSubmitHandler = function(event) {
     } else {
         alert('Please enter a city');
     }
-
-
-
 };
 // rendering of the previous city list, it also includes removing if list is over 10 items 
 function renderPreviousCity() {
@@ -57,8 +54,6 @@ function renderPreviousCity() {
         // appending to city list container 
         cityListEl.appendChild(button);
     }
-
-
 }
 // initialize items on page load, previous saved cities 
 function init() {
@@ -82,8 +77,7 @@ function storePreviousCity() {
 var getLatLon = function(city) {
     var apiKey = 'f48eeb974e0cd19636dc2234eda9e443'
     var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + apiKey + '&units=imperial';
-    // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
-    // console.log(apiUrl);
+
     fetch(apiUrl)
         .then(function(response) {
             if (response.ok) {
@@ -158,8 +152,6 @@ var displayWeather = function(weeklyForecast) {
     currentUv.innerHTML = 'UVI: <span id="uv">' + weeklyForecast[0].uvi + '</span>';
 
     // put UVI into a div and style that div based on severity level
-
-
     // loop to create the forecast info (max of 5 days)
     for (let i = 0; i < 5; i++) {
         // Getting date from object, but it is in GMT unix format
@@ -210,15 +202,12 @@ var displayWeather = function(weeklyForecast) {
 
     // appending the list to the weather container 
     weatherContainerEl.appendChild(currentWeatherEL);
-    console.log("right before uv check")
     uvCheck(weeklyForecast[0].uvi);
 
 };
 
 function uvCheck(uv) {
-    console.log("inside of uv check")
     uvEL = document.querySelector('#uv')
-    console.log(uvEL);
     if (uv < 3) {
         uvEL.setAttribute("class", "uv-favorable");
     } else if (uv > 4 && uv < 6) {
