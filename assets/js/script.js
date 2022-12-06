@@ -75,8 +75,8 @@ function storePreviousCity() {
 }
 // Function to get the lattitude and longitude 
 var getLatLon = function(city) {
-    var apiKey = 'f48eeb974e0cd19636dc2234eda9e443'
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + apiKey + '&units=imperial';
+//     var apiKey = 'f48eeb974e0cd19636dc2234eda9e443'
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + API_KEY + '&units=imperial';
 
     fetch(apiUrl)
         .then(function(response) {
