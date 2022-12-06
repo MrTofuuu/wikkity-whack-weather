@@ -100,8 +100,8 @@ var getLatLon = function(city) {
 
 // Function to get the weather forecast of the city
 var getWeather = function(lat, lon) {
-    var apiKey = 'f48eeb974e0cd19636dc2234eda9e443'
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + apiKey + "&units=imperial";
+//     var apiKey = 'f48eeb974e0cd19636dc2234eda9e443'
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&appid=" + API_KEY + "&units=imperial";
 
     fetch(apiUrl)
         .then(function(response) {
