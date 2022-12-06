@@ -11,7 +11,7 @@ var currentCityName;
 var cityList = [];
 var citySearch;
 var API_KEY = secrets.API_KEY;
-console.log(`API key is ${API_KEY}`; 
+console.log(`API key is ${API_KEY}`); 
 var formSubmitHandler = function(event) {
     event.preventDefault();
 
