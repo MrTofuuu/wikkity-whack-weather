@@ -10,7 +10,7 @@ var weeklyForecast;
 var currentCityName;
 var cityList = [];
 var citySearch;
-var API_KEY = secrets.API_KEY;
+var API_KEY = 'dfe0b1d3857db27a18d8b0fcbcc6a30e';
 console.log(`API key is ${API_KEY}`); 
 var formSubmitHandler = function(event) {
     event.preventDefault();
